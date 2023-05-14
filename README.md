@@ -17,7 +17,7 @@ Main Content - Will include a few images, brief description of myself, and highl
 
 Footer - Will include copyright information.
 
-![wireframe of About page](wireframes/About-wf.png)
+![wireframe of About page](wireframes/about-wf.png)
 
 Header -will include navigation menu.
 
@@ -27,7 +27,7 @@ Main Content - Will include a few more images, a more detailed biography of myse
 
 Footer - Will include copyright information.
 
-![wireframe of Contact page](wireframes/Contact-wf.png)
+![wireframe of Contact page](wireframes/contact-wf.png)
 
 Header -will include navigation menu.
 
