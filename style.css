@@ -1,0 +1,94 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background: grey;
+    color: #04041b;
+    font-family: 'Times New Roman', Times, serif
+}
+
+a{
+    color: #04041b;
+}
+img {
+    max-width: 50%
+}
+address{
+    font-style: normal
+}
+
+header {
+    margin: 1rem 1rem 0 1rem;
+    padding: 0.5rem 1rem;
+    background-color: darkgrey
+}
+main {
+    padding: 1rem 1rem 2rem;
+}
+
+footer {
+    padding: 1rem;
+    background-color: darkgray;
+    color: #04041b;
+    text-align: center;
+}
+
+.menu {
+    width: 100%;
+    background-color: #555;
+    overflow: auto;
+}
+  
+.menu a {
+    float: left;
+    padding: 12px;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    width: 25%;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+}
+  
+.menu a:hover {
+    background-color: #000;
+}
+  
+.menu a.active {
+    background-color: grey
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.image {
+    padding-left: 5px;
+}
+
+.text{
+    font-size: 17px;
+    padding-left: 20px;
+    text-align: center;
+    margin-right: 300px;
+}
+
+@media screen and (max-width: 600px) {
+    
+    .image {
+        padding-left: 5px;
+        width: 100%
+    }
+
+    .text{
+        font-size: 10px;
+        padding-left: 20px;
+        text-align: center;
+        margin-right: 20px;
+    }
+  }
