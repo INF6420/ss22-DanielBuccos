@@ -21,7 +21,15 @@
         </nav>
     </header>
     <main>
-
+        <form action="https://formspree.io/f/mvojorby" method="post" class="validate">
+            <label for="name">Name</label>
+            <input id="name" type="text" name="name" class="form-input">
+            <label for="email">Email</label>
+            <input id="email" type="email" name="_replyto" class="form-input" required>
+            <label for="message">Message</label>
+            <textarea id="message" name="message" class="form-input" rows="12" required></textarea>
+            <input type="submit" value="Send">
+          </form>
     </main>
     <footer>
         <div>
@@ -29,5 +37,6 @@
             <p>&copy; 2023 Daniel Buccos</p>
         </div>
     </footer>
+    <script src="script.js"></script>
 </body>
 </html>
