@@ -92,3 +92,70 @@ footer {
         margin-right: 20px;
     }
   }
+
+label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 0.5em;
+}
+
+.form-input {
+    border: 2px solid whitesmoke;
+    border-radius: 4px;
+    font-size: 18px;
+    font-weight: 400;
+    padding: 1em;
+    margin-bottom: 1.5em;
+    width: 100%;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.form-input:focus {
+    outline: none;
+    border: 2px solid grey;
+}
+
+[type="submit"] {
+    background: #555;
+    float: left;
+    padding: 12px;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    width: 25%;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    cursor: pointer;
+}
+
+[type="submit"]:hover,
+[type="submit"]:focus {
+    background-color: #000;
+}
+
+textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+.error {
+    border-color: rgb(104, 2, 2);
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.error-message {
+    color: rgb(104, 2, 2);
+    margin: -1em 0 1.5em;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+  @media screen and (min-width: 1065px) {
+    form {
+        width: 50%;
+        margin: 3em auto;
+    }
+  }
