@@ -1,0 +1,70 @@
+'Batch Mass Mailing for CPU's - Version 2.0 11/2/2022 - daniel_buccos@cargill.com
+'Scipt for mass mailings from CPU late pickup report
+Dim objExcel
+Dim objSheet, intRow, i
+Set objExcel = GetObject(,"Excel.Application") 
+Set objSheet = objExcel.ActiveWorkbook.ActiveSheet
+For i = 2 to objSheet.UsedRange.Rows.Count 
+COL1 = Trim(CStr(objSheet.Cells(i, 1).Value)) 'ColumnA
+COL2 = Trim(CStr(objSheet.Cells(i, 2).Value)) 'ColumnB
+COL3 = Trim(CStr(objSheet.Cells(i, 3).Value)) 'ColumnC
+COL4 = Trim(CStr(objSheet.Cells(i, 4).Value)) 'ColumnD
+COL5 = Trim(CStr(objSheet.Cells(i, 5).Value)) 'ColumnE
+COL6 = Trim(CStr(objSheet.Cells(i, 6).Value)) 'ColumnF
+COL7 = Trim(CStr(objSheet.Cells(i, 7).Value)) 'ColumnG
+COL8 = Trim(CStr(objSheet.Cells(i, 8).Value)) 'ColumnH
+COL9 = Trim(CStr(objSheet.Cells(i, 9).Value)) 'ColumnI
+COL10 = Trim(CStr(objSheet.Cells(i, 10).Value)) 'ColumnJ
+COL11 = Trim(CStr(objSheet.Cells(i, 11).Value)) 'ColumnK
+COL12 = Trim(CStr(objSheet.Cells(i, 12).Value)) 'ColumnL
+COL13 = Trim(CStr(objSheet.Cells(i, 13).Value)) 'ColumnM
+COL14 = Trim(CStr(objSheet.Cells(i, 14).Value)) 'ColumnN
+COL15 = Trim(CStr(objSheet.Cells(i, 15).Value)) 'ColumnO
+COL16 = Trim(CStr(objSheet.Cells(i, 16).Value)) 'ColumnP
+COL17 = Trim(CStr(objSheet.Cells(i, 17).Value)) 'ColumnQ
+COL18 = Trim(CStr(objSheet.Cells(i, 18).Value)) 'ColumnR
+COL19 = Trim(CStr(objSheet.Cells(i, 19).Value)) 'ColumnS
+COL20 = Trim(CStr(objSheet.Cells(i, 20).Value)) 'ColumnT
+COL21 = Trim(CStr(objSheet.Cells(i, 21).Value)) 'ColumnU
+COL22 = Trim(CStr(objSheet.Cells(i, 22).Value)) 'ColumnV
+COL23 = Trim(CStr(objSheet.Cells(i, 23).Value)) 'ColumnW
+COL24 = Trim(CStr(objSheet.Cells(i, 24).Value)) 'ColumnX
+COL25 = Trim(CStr(objSheet.Cells(i, 25).Value)) 'ColumnY
+COL26 = Trim(CStr(objSheet.Cells(i, 26).Value)) 'ColumnZ
+COL27 = Trim(CStr(objSheet.Cells(i, 27).Value)) 'ColumnAA
+COL28 = Trim(CStr(objSheet.Cells(i, 28).Value)) 'ColumnAB
+COL29 = Trim(CStr(objSheet.Cells(i, 29).Value)) 'ColumnAC
+COL30 = Trim(CStr(objSheet.Cells(i, 30).Value)) 'ColumnAD
+COL31 = Trim(CStr(objSheet.Cells(i, 31).Value)) 'ColumnAE
+COL32 = Trim(CStr(objSheet.Cells(i, 32).Value)) 'ColumnAF
+COL33 = Trim(CStr(objSheet.Cells(i, 33).Value)) 'ColumnAG
+COL34 = Trim(CStr(objSheet.Cells(i, 34).Value)) 'ColumnAH
+COL35 = Trim(CStr(objSheet.Cells(i, 35).Value)) 'ColumnAI
+COL36 = Trim(CStr(objSheet.Cells(i, 36).Value)) 'ColumnAJ
+'If Condition to stop from running over blank ship-to's
+if not col1 = "" Then
+    'Set Outlook objects
+    Set objOutlook = CreateObject("Outlook.Application")
+    Set objMail = objOutlook.CreateItem(0)
+    objMail.Display
+    objMail.Recipients.Add (col5)
+    'Set Subject
+    objMail.Subject = "URGENT: CARGILL SALT PAST DUE ORDER POSSIBLE CANCELLATION"
+    'Set email message
+    objMail.Body = "Good Day-" + vbcr + vbcr + "We currently show that you are past due in picking up the following order(s)" + vbcr + vbcr + "PO(s): " + " " + col3 + vbcr + vbcr + _
+    " Sales order(s) " + col2 + vbcr + vbcr + "If you will have a carrier in to pick up by " + col6 + " - no response is needed at this time." +  _
+    vbcr + vbcr + "Cargill Salt allows a onetime pickup date change. We will need to  hear from you by 4:00pm CST " + col6 + "." + vbcr + vbcr + _
+    "If the order is not changed or picked up by that date, the order will be cancelled the morning of " + col7 + "." + vbcr + vbcr + _
+    "Please contact Cargill Salt Customer Care at Salt_CustomerService@cargill.com to communicate an update if needed." + vbcr + vbcr + _
+    "Thank you." + vbcr + vbcr + "Cargill Salt Customer Care" + vbcr + "Cargill Salt Group" + vbcr + "Nourishing, Enhancing, and Protecting Lives" + vbcr + "Phone: 800-377-1017 | Salt_CustomerService@cargill.com" + vbcr + _
+    "Cargill Salt Store Available 24/7. Ask us how you can manage your account online at www.cargillsaltstore.com"
+    'Delay to load in Outlook contacts
+    Dim dteWait
+    dteWait = DateAdd("s", 15, Now())
+    Do Until (Now() > dteWait)
+    Loop
+    objMail.Send
+    Set objMail = Nothing
+    Set objOutlook = Nothing
+End if
+Next

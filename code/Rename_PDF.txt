@@ -1,0 +1,28 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Feb  3 10:30:29 2023
+
+@author: d324907
+daniel_buccos@cargill.com
+
+
+"""
+
+import fitz
+from os import DirEntry, curdir, getcwd, chdir, rename
+from glob import glob as glob
+
+directory = "Output"
+chdir(directory)
+
+pdf_list = glob('*.pdf')
+
+for pdf in pdf_list:
+    with fitz.open(pdf) as pdf_obj:
+        text = pdf_obj[0].get_text()
+    new_file_name = text.split("\n", 3000)[10].strip()
+    #new_file_name = text.find("MATERIAL NUMBER:")
+    #print(text)
+    rename(pdf, new_file_name + '_TDS.pdf')
+    print(new_file_name)
+    
