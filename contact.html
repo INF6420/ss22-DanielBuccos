@@ -21,6 +21,16 @@
         </nav>
     </header>
     <main>
+        <div class="container2">
+            <div class="image"><img src="images/headshot.avif" alt="Daniel Buccos"></div>
+            <div class="text2">
+                <h1 id="section-title">About Daniel Buccos</h1>
+                <p>Please fill out the below form if you wish to contact me. I love solving technical problems, programming, networking, and finding data driven solutions.
+                    I look forward to making your acquaintance and collaborating with you on your project!
+                </p>
+                <p><a href="https://www.linkedin.com/in/daniel-buccos-36b307119/" class="active">Linkedin Profile Here</a></p>
+                         </div>
+                         </div>
         <form action="https://formspree.io/f/mvojorby" method="post" class="validate">
             <label for="name">Name</label>
             <input id="name" type="text" name="name" class="form-input">
@@ -34,8 +44,12 @@
     <footer>
         <div>
             <h2>Copyright Information</h2>
-            <p>&copy; 2023 Daniel Buccos</p>
+            <p>&copy; <span id="year"></span> Daniel Buccos
+            </p>
         </div>
+        <script>
+            document.getElementById("year").innerHTML = new Date().getFullYear();
+        </script>
     </footer>
     <script src="script.js"></script>
 </body>

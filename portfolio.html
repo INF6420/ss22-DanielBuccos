@@ -26,8 +26,12 @@
     <footer>
         <div>
             <h2>Copyright Information</h2>
-            <p>&copy; 2023 Daniel Buccos</p>
+            <p>&copy; <span id="year"></span> Daniel Buccos
+            </p>
         </div>
+        <script>
+            document.getElementById("year").innerHTML = new Date().getFullYear();
+        </script>
     </footer>
 </body>
 </html>

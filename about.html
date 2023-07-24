@@ -21,13 +21,29 @@
         </nav>
     </header>
     <main>
-
+        <div class="container2">
+            <div class="image"><img src="images/hockey.avif" alt="Daniel Buccos"></div>
+            <div class="text2">
+                <h1 id="section-title">More About Daniel Buccos</h1>
+                <p>Originally from Fairhaven, Massachusetts, I live with my loving wife, cat, and sheepadoodle in Marysville, Michigan.
+                     During my spare time I enjoy playing ice hockey, gaming, learning more about technology, listening to podcasts on politics, and lifting weights.
+                     I hold a Bachelor's in English from the University of Central Florida where I specialized in Early Modern literature. I am currently pursuing a Master's
+                     in Information Management from Wayne State University.
+                     I work for Cargill Salt as a Data and Technology Specialist for the Customer Experience team, more about my professional, volunteer, and academic experience can
+                     be found on my LinkedIn page <a href="https://www.linkedin.com/in/daniel-buccos-36b307119/" class="active">here</a>.
+                     </p>
+                        </div>
+                    </div>
     </main>
     <footer>
         <div>
             <h2>Copyright Information</h2>
-            <p>&copy; 2023 Daniel Buccos</p>
+            <p>&copy; <span id="year"></span> Daniel Buccos
+            </p>
         </div>
+        <script>
+            document.getElementById("year").innerHTML = new Date().getFullYear();
+        </script>
     </footer>
 </body>
 </html>
