@@ -1,0 +1,31 @@
+# -*- coding: utf-8 -*-
+"""
+Place all emails in Drafts Folder
+"""
+
+from pathlib import Path
+import win32com.client
+
+output_dir = Path.cwd() / "Output"
+output_dir.mkdir(parents=True, exist_ok=True)
+
+outlook = win32com.client.Dispatch("Outlook.Application").GetNamespace("MAPI")
+
+inbox = outlook.GetDefaultFolder(16)
+
+messages = inbox.Items
+
+for message in messages:
+    subject = message.subject
+    body = message.body
+    attachments = message.attachments
+    
+    subject = subject.replace(":","")
+    
+    target_folder = output_dir# / str(subject)
+    
+    Path(target_folder / "Email_Body.txt").write_text(str(body))
+    subject = subject + ".pdf"
+    for attachment in attachments:
+        attachment.SaveAsFile(target_folder / str(subject))
+        
