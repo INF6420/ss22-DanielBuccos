@@ -1,0 +1,243 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+@Created on: Mon Oct  9 08:29:10 2023
+@Author: Daniel Buccos
+@Course: INF 6050
+@University: Wayne State University
+@Assignment: Homework 2
+    
+@Python Version: 3.9.13x   
+@Required Modules: sys
+    
+@Description: This program executes a short collection game for multiple users.
+"""
+########################### 
+# IMPORT MODULES
+###########################
+
+import sys
+
+########################### 
+# GLOBAL VARIABLES
+###########################
+
+#Global variable allows changing the demographic informations, collection
+# information, number of players, items, and guesses.
+DEMOGRAPHICS = ('Name', 'City', 'Age', 'Gender Identification')
+COLLECTIONS = ('Title', 'Type', 'Year', 'Creator')
+player_count = 2
+item_count = 3
+guesses = 10
+
+########################### 
+# USER-DEFINED FUNCTIONS
+###########################
+
+#Quitter user function closes the script if any input returns "quit."
+def quitter(a):
+    a = a.lower()
+    if a == "quit":
+        print("\nThank you for playing!")
+
+        try:
+            for i in range(0,player_count):
+                print("\n" + players[i]['Name'].capitalize() + " scored " 
+                      + str(players[i]['Score']) + " points in "
+                      + str(players[i]['Guesses']) + " guesses.")
+        except:
+            pass
+        sys.exit()
+
+########################### 
+# SCRIPT HERE
+###########################
+
+#This will greet the users and advise of global variables.
+print("\nGreetings and welcome to my guessing game! You and "
+      + str(player_count - 1)
+      + " other player(s) "
+      + "will be prompted to provide " + str(item_count) 
+      + " objects and " + str(len(COLLECTIONS) - 1) + " pieces "
+      + "of metadata for each of those objects. "
+      + "You will then be asked to guess what types of "
+      + "objects the other user(s) have entered. In example, "
+      + "if your opponent entered: Type=book, "
+      + "Tile=Neuromancer, Author=William Gibson, and Year=1984 you would "
+      + 'want to enter "book" as your guess. '
+      + "It would behoove you to pick different "
+      + "types of objects to confuse your opposition. If you pick three "
+      + "books for example, your opponent(s) could win "
+      + "the game very easily as all of your hints would "
+      + "point to the same type of object! "
+      + "You will receive one point for each correct guess and "
+      + "lose half a point for each hint requested. "
+      + "Any player may quit "
+      + 'by entering "quit" at any prompt.')
+
+#This collects the user demographics and adds them to a list of dictionaries.
+while True:
+    players = list()
+    for i in range(0,player_count):
+        temp = dict()
+        for ask in DEMOGRAPHICS:
+            
+            #This will make sure we get a numeric input for age.
+            if ask == "Age":
+                while True:
+                    try:
+                        a = (input("Player number: " + str(i+1)
+                            + ". Please provide your " + ask + ": "))
+                        temp[ask] = a
+                        a = int(a)
+                        break
+                    except:
+                        quitter(a)
+                        print("\nPlease enter a numeric value.")
+                        
+                        #This will collect any other demographic inputs.
+            else:
+                a = (input("Player number " + str(i+1)
+                    + ": Please provide your " + ask + ": "))
+                temp[ask] = a
+                quitter(a)
+                
+        #This updates the players list and hides the last users demographics.
+        temp['PlayerNumber'] = i+1
+        players.append(temp)
+        print("\n"*30)
+    
+    #This collects the items and metadata from each user.
+    for i in range(0,player_count):
+        
+        #This prints an instructional message and hides the last users
+        #item details.
+        print("\n"*30 + players[i]['Name'] + " will now be entering their "
+              + "item details. Please ensure that any other participating "
+              + "players are not watching.")
+        for x in range(0,item_count):
+            temp = dict()
+            for ask in COLLECTIONS:
+                
+                #This makes sure we get a numeric input for year.
+                if ask == "Year":
+                    while True:
+                        try:
+                            a = (input(players[i]['Name'] + ": please "
+                                             + "enter item number "
+                                             + str(x+1) + "'s " + ask + ":"))
+                            a = int(a)
+                            ask = ask + str(x)
+                            temp[ask] = a
+                            break
+                        except:
+                            quitter(a)
+                            print("\nPlease enter a numeric value.")
+                            
+                #This will collect any other item information.
+                else:
+                    a = (input(players[i]['Name'] + " please enter item "
+                                     + "number "
+                                     + str(x+1) + "'s " + ask + ":"))
+                    ask = ask + str(x)
+                    a = a.lower()
+                    temp[ask] = a
+                    quitter(a)
+            players[i] = players[i] | temp
+    print("\n"*30)
+    
+    #This collects user guesses and checks to see if they are correct. It will
+    #also handle hints and scoring.
+    for i in range(0,player_count):
+        
+        #This prints an instructional message.
+        print("\n" + players[i]['Name'] + ": please guess an object type. "
+              + "You may "
+              + 'ask for a hint by entering "hint" at any '
+              + "time, but it will cost "
+              + "you half a point for each one. For each hint, you will "
+              + "receive a piece of metadata from your opposition's items.")
+        
+        #This flushes the previous users variables.
+        players[i]['Score'] = 0
+        players[i]['Guesses'] = 0
+        temp = {}
+        temp2 = {}
+        
+        #This collects the answers and metadata hints provided by the other
+        #users and stores them in two temp dictionaries.
+        for y in range(0,player_count):
+            if y != i:
+                for x in range(0,item_count):
+                    temp.update({"Answer" + str(x) + str(y) :
+                                 (players[y]['Type' + str(x)])})
+                        
+                    #This loops through any remaining metadata and creates
+                    #a dictionary of hints
+                    for ask in COLLECTIONS:
+                        if ask!= "Type":
+                            temp2.update({ask + str(x) + str(y) :
+                                         (players[y][ask + str(x)])})
+                        
+        #This collects the user guesses or requests for hints
+        for x in range(0,guesses):
+            a = input(players[i]['Name'] + ": please enter a guess or request "
+               + "a hint. You have " + str(guesses - x) + " guess(es) left:")
+            a = a.lower()
+            players[i]['Guesses'] = players[i]['Guesses'] + 1
+            quitter(a)
+            
+            #This set of logic handles correct guesses, removes them from
+            #the correct answers temp dictionary, removes any cooresponding
+            #hints, and reqards the user with a point.
+            val = temp.values()
+            if a in val:
+                key = (list(temp.keys())[list(temp.values()).index(a)])
+                print("\n" + a.capitalize() + " is correct! You have "
+                       + str(len(temp) - 1)
+                       + " type(s) left to guess!")
+                players[i]['Score'] = players[i]['Score'] + 1
+                del temp[key]
+                key = key[6:]
+                for ask in COLLECTIONS:
+                    if ask != "Type":
+                        count = ask + str(key)
+                        temp2.pop(count, None)
+                        
+            #This prints a congratulatory message and breaks the loop if the
+            #answers temp table is empty.
+            if not val:
+                print("\nCongratulations! You have guessed all of your "
+                  + "oppositions types correctly!")
+                break
+            
+            #This handles hint assignment, deducts half a point for each
+            #requested hint, and removes the hint from the hints temp
+            #dictionary.
+            if a == "hint":
+                 if temp2 != {}:
+                     value = temp2.popitem()
+                     players[i]['Score'] = players[i]['Score'] - .5
+                     hint = value[0]
+                     hint = hint[:-2]
+                     print("\nYour hint is the " + hint.capitalize() + ": " 
+                           + str(value[1]))
+                     
+                 #This notifies the user if there are no more hints to give.
+                 if temp2 == {}:
+                     print("\nSorry, there are no more hints to give.")
+    
+    #This prints a completion message and provides a score.
+    print("\nThank you for playing! That was the last guess of the last "
+          + "round! Please see as follows the scores and guess counts for each"
+          + " particpating Player")
+    for i in range(0,player_count):
+        print("\n" + players[i]['Name'].capitalize() + " scored " 
+              + str(players[i]['Score']) + " points in "
+              + str(players[i]['Guesses']) + " guesses.")
+        
+    #This asks the user if they wish to play again.
+    a = input('\nPlease press the enter key if you would like to play again '
+                      + 'or "quit" if you wish to quit:')
+    quitter(a)
+        
